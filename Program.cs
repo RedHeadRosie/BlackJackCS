@@ -198,55 +198,66 @@ namespace BlackJackCS
                         Console.WriteLine("Please enter either HIT or STAND");
                     }
                 }
-
-                while (dealersTotal < 17)
+                if (playersTotal <= 21)
                 {
-                    Console.WriteLine("The Dealer has chosen to HIT");
-                    dealersHand.Add(deck[cardsDealt]);
-                    cardsDealt++;
-                    dealersTotal = CountTotal(dealersHand);
-                    PrintDealersHand(dealersHand);
-                    Console.WriteLine($"the dealer's total is {dealersTotal}");
-                }
-
-                if (dealersTotal == 17)
-                {
-                    //PrintDealersHand(dealersHand);
-                    Console.WriteLine("The dealer has chosen to STAND");
-                    if (dealersTotal >= playersTotal)
+                    while (dealersTotal < 17)
                     {
+                        Console.WriteLine("The Dealer has chosen to HIT");
+                        dealersHand.Add(deck[cardsDealt]);
+                        cardsDealt++;
+                        dealersTotal = CountTotal(dealersHand);
+                        PrintDealersHand(dealersHand);
                         Console.WriteLine($"the dealer's total is {dealersTotal}");
-                        Console.WriteLine($"the player's total is {playersTotal}");
-                        DealerWins();
                     }
-                    else
+
+                    if (dealersTotal == 17)
                     {
-                        Console.WriteLine($"the dealer's total is {dealersTotal}");
-                        Console.WriteLine($"the player's total is {playersTotal}");
+                        //PrintDealersHand(dealersHand);
+                        Console.WriteLine("The dealer has chosen to STAND");
+                        if (dealersTotal >= playersTotal)
+                        {
+                            Console.WriteLine($"the dealer's total is {dealersTotal}");
+                            Console.WriteLine($"the player's total is {playersTotal}");
+                            DealerWins();
+                        }
+                        else
+                        {
+                            Console.WriteLine($"the dealer's total is {dealersTotal}");
+                            Console.WriteLine($"the player's total is {playersTotal}");
+                            PlayerWins();
+                        }
+                    }
+
+                    if (dealersTotal > 17 && dealersTotal <= 21)
+                    {
+                        //PrintDealersHand(dealersHand);
+                        Console.WriteLine("The dealer has chosen to STAND");
+                        if (dealersTotal >= playersTotal)
+                        {
+                            Console.WriteLine($"the dealer's total is {dealersTotal}");
+                            Console.WriteLine($"the player's total is {playersTotal}");
+                            DealerWins();
+                        }
+                        else
+                        {
+                            Console.WriteLine($"the dealer's total is {dealersTotal}");
+                            Console.WriteLine($"the player's total is {playersTotal}");
+                            PlayerWins();
+                        }
+                    }
+
+                    if (dealersTotal > 21)
+                    {
+                        //PrintDealersHand(dealersHand);
+                        //Console.WriteLine($"the dealer's total is {dealersTotal}");
+                        //Console.WriteLine($"the player's total is {playersTotal}");
+                        Console.WriteLine("The dealer has gone bust! ");
                         PlayerWins();
                     }
+
                 }
 
-                if (dealersTotal > 17 && dealersTotal <= 21)
-                {
-                    //PrintDealersHand(dealersHand);
-                    Console.WriteLine("The dealer has chosen to STAND");
-                    if (dealersTotal >= playersTotal)
-                    {
-                        Console.WriteLine($"the dealer's total is {dealersTotal}");
-                        Console.WriteLine($"the player's total is {playersTotal}");
-                        DealerWins();
-                    }
-                }
 
-                if (dealersTotal > 21)
-                {
-                    //PrintDealersHand(dealersHand);
-                    //Console.WriteLine($"the dealer's total is {dealersTotal}");
-                    //Console.WriteLine($"the player's total is {playersTotal}");
-                    Console.WriteLine("The dealer has gone bust! ");
-                    PlayerWins();
-                }
 
 
                 if (playersTotal == 21 && dealersTotal != 21)
